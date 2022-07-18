@@ -29,27 +29,85 @@ const printStacks = () => {
   console.log("c: " + stacks.c);
 }
 
+// Games starts with 4,3,2,1 in the A stack
+// Win is 4,3,2,1 in either B
+
 // Next, what do you think this function should do?
-const movePiece = () => {
-  // Your code here
+const movePiece = (startStack, endStack) => {
+  // move the top piece of the start stack 
+
+  // move it to the end of selected endStack
+
+  // .pop() removes selected piece from array
+  let start = stacks[startStack].pop();
+
+
+  // .push() will put the piece at the endStack
+  stacks[endStack].push(start);
 
 }
 
 // Before you move, should you check if the move it actually allowed? Should 3 be able to be stacked on 2
-const isLegal = () => {
-  // Your code here
+const isLegal = (startStack, endStack) => {
+  // is startStack > endStack? no
+  let start = stacks[startStack].slice(-1);
+  let end = stacks[endStack].slice(-1);
+  // is startStack < endStack? yes(implied no code needed)
+  // is endStack empty? yes
+  // can i move the piece to the same stack?
+  if (stacks[endStack].length == 0){
+    return true;
+  } if (start < end){
+    return true;
+  }else {
+    return false;
+  }
+
+  
+
+
 
 }
 
 // What is a win in Towers of Hanoi? When should this function run?
 const checkForWin = () => {
-  // Your code here
+  // if all four numbers are in stack b or c
+  // stack["b"].length == 4 || stacks["c"].length
+  if (stacks["b"].length == 4 || stacks['c'].length == 4) {
+    return true;
+  } else {
+    return false;
+  }
+
 
 }
 
 // When is this function called? What should it do with its argument?
 const towersOfHanoi = (startStack, endStack) => {
-  // Your code here
+  // Here's where we put it all together
+  if (isLegal(startStack, endStack)) {
+    movePiece(startStack, endStack)
+  }
+
+  if (checkForWin()){
+    console.log('You Win!');
+  }
+//grab the arguments (a and c) and set the variables
+
+//if it's true, call the movePiece()
+//if false, display "invalid move"
+
+
+//   if(isLegal(start, end)) {
+//     movePiece(start, end)
+//   } else {
+//     console.log('Invalid move. Try again');
+//   }
+
+// // check for win
+//   if (checkForWin()){
+//     console.log('You Won!');
+//   }
 
 }
 
